@@ -19,9 +19,11 @@ pipeline {
         stage('connect via ssh') {
             steps {
                 sh '''
-                    ssh -i /home/jenkins/.ssh/key -o StrictHostKeyChecking=no ubuntu@13.42.104.143
+                    #!/bin/bash
+                    ssh -i /home/jenkins/.ssh/key -o StrictHostKeyChecking=no ubuntu@13.42.104.143 << EOF
                     touch /home/ubuntu/readme.md
                     echo "# Hello" > /home/ubuntu/readme.md
+                    << EOF
                 '''
             }
         }
