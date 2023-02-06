@@ -16,5 +16,14 @@ pipeline {
                 sh 'sudo apt install nginx -y'
             }
         }
+        stage('connect via ssh') {
+            steps {
+                sh '''
+                    ssh -i /home/jenkins/.ssh/key -o StrictHostKeyChecking=no ubuntu@13.42.104.143
+                    touch /home/ubuntu/readme.md
+                    echo "# Hello" > /home/ubuntu/readme.md
+                '''
+            }
+        }
     }
 }
